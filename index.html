@@ -41,10 +41,10 @@
     </script>
     
 </head>
-<body class="bg-theme-navy text-slate-800 antialiased">
+<body class="bg-white text-slate-800 antialiased">
 
     <!-- MENÚ SUPERIOR (NAVEGACIÓN POR SECCIONES) -->
-    <header class="sticky top-0 z-50 bg-theme-green backdrop-blur-md border-b border-sky-100 shadow-sm py-4">
+    <header class="sticky top-0 z-50 bg-theme-navy backdrop-blur-md border-b-2 border-theme-green shadow-sm py-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
             <a href="#" class="flex items-center gap-3">
@@ -52,8 +52,8 @@
                     <img src="./Public/Logosimbolo_mini_fo.png">
                 </div>
                 <div class="ml-2">
-                    <span class="text-3xl font-bold text-theme-navy tracking-tight block leading-none">Departamento de Asuntos Técnicos</span>
-                    <span class="text-lg text-white font-medium tracking-wide">Dirección General de Recursos Humanos</span>
+                    <span class="text-3xl font-bold text-white tracking-tight block leading-none">Departamento de Asuntos Técnicos</span>
+                    <span class="text-lg text-theme-green font-medium tracking-wide">Dirección General de Recursos Humanos</span>
                 </div>
             </a>
 
@@ -136,8 +136,45 @@
             </div>
         </section> -->
 
+        <!-- SECCIÓN 4: BLOQUE DESTACADO / MÓDULOS -->
+        <section id="sec-1" class="bg-sky-50/80 rounded-custom p-8 md:p-12 border border-sky-100">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    
+                    <h2 class="text-3xl md:text-4xl font-bold text-theme-navy mt-1">Terminales Biométricas</h2>
+                </div>
+                <p class="text-slate-600 max-w-md mt-2 md:mt-0">Manuales e infografias con información útil para personal y administradores.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="activity" class="w-8 h-8 text-theme-blue mb-3"></i>
+                    <h4 class="text-lg font-bold text-theme-navy mb-1">Manual de enrolamiento</h4>
+                    <p class="text-xs text-slate-600">Manual para Administradores o Personal Habilitado.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="compass" class="w-8 h-8 text-theme-teal mb-3"></i>
+                    <h4 class="text-lg font-bold text-theme-navy mb-1">Guía rápida</h4>
+                    <p class="text-xs text-slate-600">Infografía con pasos rápidos para el enrolado de personal.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="bar-chart-3" class="w-8 h-8 text-theme-green mb-3"></i>
+                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.3</h4>
+                    <p class="text-xs text-slate-600">Descripción genérica del tercer ítem explicativo del módulo.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="zap" class="w-8 h-8 text-theme-blue mb-3"></i>
+                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.4</h4>
+                    <p class="text-xs text-slate-600">Descripción genérica del cuarto ítem explicativo del módulo.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- SECCIÓN 3: TARJETAS EN GRID -->
-        <section id="sec-1" class="pt-6">
+        <section id="sec-2" class="pt-6">
             <div class="text-center max-w-2xl mx-auto mb-10">
                 <span class="text-theme-teal font-bold uppercase tracking-wider text-xs">Categoría o Etiqueta</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-theme-navy mt-1">Título 2</h2>
@@ -177,42 +214,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 4: BLOQUE DESTACADO / MÓDULOS -->
-        <section id="sec-2" class="bg-sky-50/80 rounded-custom p-8 md:p-12 border border-sky-100">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
-                <div>
-                    <span class="text-theme-blue font-bold uppercase tracking-wider text-xs">Módulo Especial</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-theme-navy mt-1">Título 3</h2>
-                </div>
-                <p class="text-slate-600 max-w-md mt-2 md:mt-0">Texto de apoyo genérico para describir las características del bloque 3.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <i data-lucide="activity" class="w-8 h-8 text-theme-blue mb-3"></i>
-                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.1</h4>
-                    <p class="text-xs text-slate-600">Descripción genérica del primer ítem explicativo del módulo.</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <i data-lucide="compass" class="w-8 h-8 text-theme-teal mb-3"></i>
-                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.2</h4>
-                    <p class="text-xs text-slate-600">Descripción genérica del segundo ítem explicativo del módulo.</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <i data-lucide="bar-chart-3" class="w-8 h-8 text-theme-green mb-3"></i>
-                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.3</h4>
-                    <p class="text-xs text-slate-600">Descripción genérica del tercer ítem explicativo del módulo.</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <i data-lucide="zap" class="w-8 h-8 text-theme-blue mb-3"></i>
-                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.4</h4>
-                    <p class="text-xs text-slate-600">Descripción genérica del cuarto ítem explicativo del módulo.</p>
-                </div>
-            </div>
-        </section>
+        
 
         <!-- SECCIÓN 5: PASOS / PROCESO -->
         <section id="sec-3" class="bg-theme-mint/40 border border-theme-teal/20 rounded-custom p-8 md:p-12">

@@ -25,24 +25,6 @@
     </header>
 
     <div class="container mb-5">
-        
-        <div class="d-flex flex-row mb-4">
-            <!-- Buscador general -->
-            <div class="col-8">
-                <div class="search-box">
-                    
-                    <input type="text" id="buscadorGeneral" class="form-control form-control-lg" placeholder="Buscar por grupo o dependencia...">
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#infoModal">
-                        <i class="fa-solid fa-circle-info"></i> Información
-                    </button>
-                </div>
-            </div>
-        </div>
-        
 
         <!-- Pestañas de Regiones -->
         <ul class="nav nav-pills justify-content-center mb-4 gap-2" id="regionTabs" role="tablist">
@@ -62,6 +44,24 @@
                 <button class="nav-link rounded-pill px-4" id="coatzacoalcos-tab" data-bs-toggle="pill" data-bs-target="#coatzacoalcos" type="button" role="tab">Coatzacoalcos-Minatitlán</button>
             </li>
         </ul>
+        
+        <div class="d-flex flex-row mb-4">
+            <!-- Buscador general -->
+            <div class="col-8">
+                <div class="search-box">
+                    
+                    <input type="text" id="buscadorGeneral" class="form-control form-control-lg" placeholder="Buscar por grupo o dependencia...">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#infoModal">
+                        <i class="fa-solid fa-circle-info"></i> Información
+                    </button>
+                </div>
+            </div>
+        </div>
+        
 
         <!-- Contenido de las Pestañas (Acordeones) -->
         <div class="tab-content" id="regionTabsContent">
