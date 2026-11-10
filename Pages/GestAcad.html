@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Gestión académica</title>
+		<!-- estilos Bulma -->
+		<link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+        <!-- estilos propios -->
+		<link rel="stylesheet" type="text/css" href="../sources/cssGestAcad.css">
+		<!-- iconos -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Alpine.js -->
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="layout">
+
+            <section class="hero is-small bg-azul is-bold mb-3">
+                <div class="hero-body">
+                    <div class="container has-text-centered">
+                        <h2 class="title is-4 has-text-white">Actividades del Proceso de Gestión Académica-Administrativa</h2>
+                        <h3 class="subtitle is-5 has-text-white">Secretaría Académica <br>Secretaría de Administración y Finanzas</h3>
+                    </div>
+                </div>
+            </section>
+
+			<div class="main" x-data="{ tab: 'crono' }">
+
+                <section class="section tabs-fijas my-0 pt-2">
+                    <div class="container">		
+                        <div class="tabs is-boxed is-centered">
+                            <ul>
+                                <li :class="{ 'is-active': tab === 'crono' }">
+                                    <a @click="tab = 'crono'">
+                                        <span class="icon is-small">
+                                            <i class="fa-regular fa-calendar-days"></i>
+                                        </span>
+                                        <span class="tab-text">Cronograma</span>
+                                    </a>
+                                </li>
+
+                                <li :class="{ 'is-active': tab === 'convocatorias' }">
+                                    <a @click="tab = 'convocatorias'">
+                                        <span class="icon is-small">
+                                            <i class="fa-solid fa-file"></i>
+                                        </span>
+                                        <span class="tab-text">Convocatorias</span>
+                                    </a>
+                                </li>
+
+                                <li :class="{ 'is-active': tab === 'il' }">
+                                    <a @click="tab = 'il'">
+                                        <span class="icon is-small">
+                                            <i class="fa fa-cloud"></i>
+                                        </span>
+                                        <span class="tab-text">Inscripción en línea</span>
+                                    </a>
+                                </li>
+
+                                <li :class="{ 'is-active': tab === 'caracad' }">
+                                    <a @click="tab = 'caracad'">
+                                        <span class="icon is-small">
+                                            <i class="fa fa-check-circle"></i>
+                                        </span>
+                                        <span class="tab-text">Cargas Académicas</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONTENIDO -->
+                <section class="section mt-0 pt-0">
+                    <div class="container">
+
+                        <div x-show="tab === 'crono'">
+                            <div x-data="cronogramaApp()" class="cronograma-dashboard">
+                                <div class="card shadow-dashboard">
+                                    <div class="card-content">
+                                        <div class="nivel-superior">
+                                            <h2 class="titulo-dashboard">Cronograma de Actividades del Proceso de Gestión Académica-Administrativa</h2>
+                                            <div class="field">
+                                                <div class="control has-icons-left">
+                                                    <input class="input is-small" type="text" placeholder="Buscar actividad o responsable..." x-model="busqueda">
+                                                    <span class="icon is-left">🔎</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="table-container">
+                                            <table class="table is-fullwidth tabla-dashboard">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-id has-text-centered" rowspan="2">Núm.</th>
+                                                        <th class="col-actividad has-text-centered" rowspan="2">Actividad</th>
+                                                        <th class="col-responsable has-text-centered" rowspan="2">Responsable</th>
+                                                        <th class="col-mes has-text-centered" :colspan="meses.length">2026</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <template x-for="mes in meses" :key="mes">
+                                                            <th class="col-mes has-text-centered bg-verde" x-text="mes"></th>
+                                                        </template>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <template x-for="item in datosFiltrados" :key="item.id">
+                                                        <tr>
+                                                            <td class="celda-fecha has-text-centered" x-text="item.id"></td>
+                                                            <td>
+                                                                <div class="has-text-weight-semibold" x-text="item.actividad"></div>
+                                                                <div x-show="item.proceso" class="is-size-7 has-text-success mt-1">
+                                                                    <i class="fas fa-project-diagram mr-1"></i><span x-text="item.proceso"></span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="responsable" x-text="item.responsable"></td>
+
+                                                            <template x-for="(mes, index) in meses" :key="index">
+                                                                <td class="has-text-centered is-size-7" :class="claseCelda(item[mes], index)">
+                                                                    <span x-text="item[mes] || '-'"></span> 
+                                                                </td>
+                                                            </template>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div x-show="tab === 'convocatorias'">
+                            <div x-data="convocatoriasApp()" class="cronograma-dashboard">
+                                <div class="card shadow-dashboard">
+                                    <div class="card-content">
+                                        <div class="nivel-superior">
+                                            <h2 class="titulo-dashboard">Convocatorias</h2>
+                                        </div>
+                                    
+                                        <div class="table-container">
+                                            <table class="table tabla-dashboard tabla-small">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-actividad-small has-text-centered">Actividad</th>
+                                                        <th class="col-fecha-small has-text-centered">Fecha</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template x-for="item in datos" :key="item.titulo">
+                                                        <tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha) }">
+                                                            <td class="has-text-weight-semibold" x-text="item.titulo"></td>
+                                                            <td class="has-text-right" x-text="item.fechaTexto"></td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div x-show="tab === 'il'">
+                            <div x-data="ilineaApp()" class="cronograma-dashboard">
+                                <div class="card shadow-dashboard">
+                                    <div class="card-content">
+                                        <div class="nivel-superior">
+                                            <h2 class="titulo-dashboard">Inscripción en Línea</h2>
+                                        </div>
+                                    
+                                        <div class="table-container">
+                                            <table class="table is-fullwidth tabla-dashboard">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-id has-text-centered">Núm.</th>
+                                                        <th class="has-text-centered">Actividad</th>
+                                                        <th class="col-responsable has-text-centered">Responsable</th>
+                                                        <th class="has-text-centered">Fecha</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template x-for="item in datos" :key="item.id">
+                                                        <tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha) }">
+                                                            <td class="celda-fecha has-text-centered" x-text="item.id"></td>
+                                                            <td>
+                                                                <div class="has-text-weight-semibold" x-text="item.actividad"></div>
+                                                                <div x-show="item.proceso" class="is-size-7 has-text-success mt-1">
+                                                                    <i class="fas fa-project-diagram mr-1"></i><span x-text="item.proceso"></span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="responsable" x-text="item.responsable"></td>
+                                                            <td class="has-text-right" x-text="item.fechaTexto"></td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div x-show="tab === 'caracad'">
+                            <div x-data="caracadApp()" class="cronograma-dashboard">
+                                <div class="card shadow-dashboard">
+                                    <div class="card-content">
+                                        <div class="nivel-superior">
+                                            <h2 class="titulo-dashboard">Revisión de cargas académicas</h2>
+                                        </div>
+                                    
+                                        <div class="table-container">
+                                            <table class="table tabla-dashboard tabla-small">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-actividad-small has-text-centered">Actividad</th>
+                                                        <th class="col-fecha-small has-text-centered">Fecha</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template x-for="item in datos" :key="item.titulo">
+                                                        <tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha) }">
+                                                            <td class="has-text-weight-semibold" x-text="item.titulo"></td>
+                                                            <td class="has-text-right" x-text="item.fechaTexto"></td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div x-show="tab === 'caracaddp'">
+                           <div x-data="convocatoriasApp2()" class="panel-ejecutivo">
+
+                                <div class="card shadow-dashboard">
+                                    <div class="card-content">
+
+                                        <div class="nivel-superior">
+                                            <h2 class="titulo-dashboard">
+                                                <span class="icon mr-2">
+                                                    <i class="fa-regular fa-note-sticky"></i>
+                                                </span>
+                                                Convocatorias
+                                            </h2>
+                                        </div>
+
+                                        <div class="tabla-centrada">
+
+                                            <table class="table tabla-convocatorias">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Actividad</th>
+                                                        <th>Fecha</th>
+                                                        <th>Estatus</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <template x-for="item in datos" :key="item.titulo">
+                                                        <tr>
+                                                            
+                                                            <td class="actividad">
+                                                                <span x-text="item.titulo"></span>
+                                                            </td>
+
+                                                            <td class="fecha">
+                                                                <span x-text="item.fechaTexto"></span>
+                                                            </td>
+
+                                                            <td class="estatus">
+
+                                                                <span 
+                                                                    class="tag"
+                                                                    :class="{
+                                                                        'tag-vencido': esVencida(item.fecha),
+                                                                        'tag-hoy': esHoy(item.fecha),
+                                                                        'tag-activo': !esVencida(item.fecha) && !esHoy(item.fecha)
+                                                                    }"
+                                                                    x-text="
+                                                                        esVencida(item.fecha) ? 'Vencida' :
+                                                                        esHoy(item.fecha) ? 'Hoy' :
+                                                                        'Vigente'
+                                                                    ">
+                                                                </span>
+
+                                                            </td>
+
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div x-data="caracaddpApp()" class="cronograma-dashboard">
+                                <div class="card shadow-dashboard">
+                                    <div class="card-content">
+                                        <div class="nivel-superior">
+                                            <h2 class="titulo-dashboard">Revisión de cargas académicas DP</h2>
+                                        </div>
+                                    
+                                        <div class="table-container">
+                                            <table class="table tabla-dashboard tabla-small">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="has-text-centered">Actividad</th>
+                                                        <th class="has-text-centered">Fecha</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template x-for="item in datos" :key="item.titulo">
+                                                        <tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha) }">
+                                                            <td class="has-text-weight-semibold" x-text="item.titulo"></td>
+                                                            <td x-text="item.fechaTexto"></td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+
+                    </div>		
+                </section>
+		</div>
+		
+	</div>
+		<script src="../sources/datosGestAcad.js"></script>
+        <script src="../sources/jsGestAcad.js"></script>
+    </body>
+</html>

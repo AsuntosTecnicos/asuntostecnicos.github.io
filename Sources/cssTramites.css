@@ -1,0 +1,77 @@
+:root {
+    --azul: rgb(24,82,157);
+	--verde: rgb(40,173,86);
+}
+
+.category-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.bg-azul { 
+    background-color: var(--azul) !important;
+    color: white !important; 
+}
+
+.text-verde { color: var(--verde) !important; }
+
+.border-verde { 
+    border-left: 5px solid var(--verde); 
+}
+        
+/* Estilo para que las filas se sientan interactivas */
+.panel-block:hover {
+    background-color: #f5f5f5;
+}
+
+/* Clases de borde dinámicas */
+.border-personal { border-left: 6px solid #7957d5; } 
+.border-nominas { border-left: 6px solid #48c774; } 
+.border-relaciones { border-left: 6px solid #ffdd57; }
+.border-evaluacion { border-left: 6px solid #ff3860; }
+.border-tecnicos { border-left: 6px solid #3273dc; }
+
+/* Animación de entrada */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Skeleton loader (opcional) */
+.is-loading-skeleton {
+    background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 50%, #f2f2f2 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    height: 100px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.tabs.is-boxed li.is-active a {
+    background-color: rgb(24,82,157);
+    color: #fff;
+    font-weight: 600;
+}
+
+.tabs.is-boxed li a {
+    color: rgb(24,82,157);
+}
+
+.tabs.is-boxed li a:hover {
+    background-color: rgba(24,82,157, 0.08);
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos de Acceso y Dependencias - Universidad Veracruzana</title>
+    <!-- Tailwind CSS for utility-first responsive layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        uvGreen: 'rgb(40, 173, 86)',
+                        uvBlue: 'rgb(24, 82, 157)',
+                        uvGreenHover: 'rgb(33, 145, 71)',
+                        uvBlueHover: 'rgb(18, 65, 126)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom smooth transition effects */
+        .tab-transition {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[rgb(24,82,157)] to-[rgb(40,173,86)] flex items-center justify-center text-white shadow-md">
+                        <i class="fa-solid fa-id-card text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-[rgb(24,82,157)]">Dirección General de Recursos Humanos</span>
+                        <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Grupos de Acceso</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="bg-gray-100 border border-gray-200 rounded-lg px-4 py-2 text-sm">
+                        <span class="text-gray-500 font-medium">Total Registros:</span>
+                        <span id="total-badge" class="font-bold text-[rgb(40,173,86)] ml-1">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+        <!-- Search and Filter Bar -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div class="w-full md:w-1/2 relative">
+                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="Buscar por grupo o dependencia..." class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[rgb(24,82,157)] focus:bg-white text-sm transition-all">
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Regional Tabs Navigation -->
+        <div class="mb-6 overflow-x-auto pb-2">
+            <nav id="regionTabs" class="flex space-x-2 min-w-max border-b border-gray-200" aria-label="Tabs">
+                <!-- Se inyectan con JS -->
+            </nav>
+        </div>
+
+        <!-- Tab Contents Container -->
+        <div id="regionTabContent" class="space-y-6">
+            <!-- Se inyectan con JS -->
+        </div>
+
+        <div id="globalEmptyState" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-gray-300 mt-4">
+            <div class="w-16 h-16 bg-blue-50 text-[rgb(24,82,157)] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800">No se encontraron resultados</h3>
+            <p class="text-sm text-gray-500 mt-1">Intenta ajustando los términos de búsqueda en el campo superior.</p>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white mt-12 py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Universidad Veracruzana</span>
+            </div>
+            <p class="text-sm text-gray-400">Dirección General de Recursos Humanos &bull; Departamento de Asuntos Técnicos</p>
+            
+        </div>
+    </footer>
+    <script src="../source/gruposAcceso.js"></script>
+</body>
+</html>    

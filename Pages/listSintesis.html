@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de Síntesis Curriculares</title>
+    <link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="../sources/cssSintesis.css">
+
+</head>
+<body>
+
+    <section class="hero bg-azul is-small">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title has-text-white">Funcionarios UV</h1>
+                <h2 class="subtitle has-text-white">Dirección General de Recursos Humanos</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="box">
+                <div class="level">
+                    <div class="level-left">
+                        <h3 class="title is-4">Listado de Síntesis Curriculares</h3>
+                    </div>
+                    <div class="level-right">
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input class="input" type="text" id="busqueda" placeholder="Buscar por nombre..." onkeyup="filtrarTabla()">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table is-hoverable is-fullwidth is-striped">
+                        <thead>
+                            <tr>
+                                <th>No. Personal</th>
+                                <th>Nombre Completo</th>
+                                <th>Cargo</th>
+                                <th class="has-text-centered">Ver</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla_cuerpo">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p><strong>Universidad Veracruzana<br>
+            Dirección General de Recursos Humanos</strong><br>
+            Departamento de Asuntos Técnicos &copy; 2026</p>
+        </div>
+    </footer>
+
+    <script src="../sources/datosSintesis.js"></script>   
+    <script src="../sources/jsListSintesis.js"></script>
+</body>
+</html>

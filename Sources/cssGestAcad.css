@@ -1,0 +1,316 @@
+:root {
+	--azul: rgb(24,82,157);
+	--verde: rgb(40,173,86);
+}
+
+.titulo {
+	color: var(--azul);
+}
+
+.bg-azul { 
+    background-color: var(--azul) !important;
+    color: white !important; 
+}
+
+.bg-verde { 
+    background-color: var(--verde) !important;
+    color: white !important; 
+}
+
+.barratitulo {
+    background: linear-gradient(to right,  #28AD56, #18529D, #28AD56); 
+    height: 2rem;
+    flex-shrink: 0;
+	  max-height: 70px;
+}
+
+.bg-m0 {
+    background: linear-gradient(to right, rgb(68, 180, 255), rgb(122, 202, 255)); 
+}
+
+.bg-m1 {
+    background: linear-gradient(to right, rgb(122, 202, 255), rgb(154, 214, 255)); 
+}
+
+.bg-m2 {
+    background: linear-gradient(to right, rgb(154, 214, 255), rgb(174, 223, 255)); 
+}
+
+.bg-m3 {
+    background: linear-gradient(rgb(174, 223, 255)); 
+}
+
+.bg-m4 {
+    background: linear-gradient(to right, rgb(174, 223, 255), rgb(154, 214, 255)); 
+}
+
+.bg-m5 {
+    background: linear-gradient(to right, rgb(154, 214, 255), rgb(122, 202, 255)); 
+}
+
+.bg-m6 {
+    background: linear-gradient(to right, rgb(122, 202, 255), rgb(68, 180, 255)); 
+}
+
+.tabs.is-boxed li.is-active a {
+    background-color: rgb(24,82,157);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .tabs.is-boxed li a {
+    color: rgb(24,82,157);
+  }
+
+  .tabs.is-boxed li a:hover {
+    background-color: rgba(24,82,157, 0.08);
+  }
+
+
+/* Hacer que el encabezado de la tabla sea fijo al hacer scroll */
+.table-container {
+    max-height: 70vh; /* Altura máxima para que quepa en pantalla */
+    overflow-y: auto;
+}
+
+
+/* Estilo para las etiquetas de responsables */
+.tag.is-info.is-light {
+    height: auto;
+    padding: 0.5em;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+}
+
+
+
+/*----------*/
+
+/* CONTENEDOR GENERAL */
+.cronograma-dashboard {
+    padding: 1rem;
+}
+
+/* CARD MODERNA */
+.shadow-dashboard {
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    border: none;
+}
+
+/* ENCABEZADO SUPERIOR */
+.nivel-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.titulo-dashboard {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #363636;
+}
+
+/* TABLA */
+.tabla-dashboard {
+    font-size: 0.85rem;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tabla-small {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+
+/* HEADERS */
+.tabla-dashboard thead th {
+    vertical-align: middle;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+    border-bottom: 2px solid #e5e7eb;
+    background: var(--azul);
+    color:white;
+}
+
+/* Primera fila */
+.tabla-dashboard thead tr:first-child th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+/* Segunda fila (meses) */
+.tabla-dashboard thead tr:nth-child(2) th {
+    position: sticky;
+    top: 36px; /* igual a la altura de la primera fila */
+    z-index: 2;
+}
+
+
+/* FILAS */
+.tabla-dashboard tbody tr {
+    transition: all 0.15s ease;
+}
+
+.tabla-dashboard tbody tr:hover {
+    background: #f9fafb;
+}
+
+.tabla-dashboard td{
+    vertical-align:middle;
+}
+
+/* COLUMNAS */
+.col-id {
+    width: 5%;
+    text-align: center;
+}
+
+.col-actividad {
+    width: 25%;
+}
+
+.col-responsable {
+    width: 15%;
+    text-align: center;
+}
+
+.col-mes {
+    width: 7%;
+    text-align: center;
+}
+
+.col-actividad-small{
+    width: 70%;
+}
+
+.col-frecha-small{
+    width: 30%;
+}
+
+/* CELDAS */
+.actividad {
+    font-weight: 500;
+}
+
+.responsable {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.celda-fecha {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.celda-fechatexto {
+    vertical-align: middle;
+    text-align: end;
+}
+
+/* CELDAS VACÍAS */
+.celda-vacia {
+    color: #d1d5db;
+    font-size: 0.8rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nivel-superior {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/*------------------------*/
+/* CONTENEDOR CENTRADO */
+
+.tabla-centrada{
+    display:flex;
+    justify-content:center;
+}
+
+/* TABLA */
+
+.tabla-convocatorias{
+    width:65%;
+    min-width:420px;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+/* HEADER */
+
+.tabla-convocatorias thead th{
+    background:var(--azul);
+    color:white;
+    text-align:center;
+    font-weight:600;
+}
+
+/* CELDAS */
+
+.tabla-convocatorias td{
+    vertical-align:middle;
+}
+
+/* ACTIVIDAD */
+
+.tabla-convocatorias .actividad{
+    font-weight:600;
+}
+
+/* FECHA */
+
+.tabla-convocatorias .fecha{
+    text-align:center;
+    font-weight:500;
+}
+
+/* ESTATUS */
+
+.tabla-convocatorias .estatus{
+    text-align:center;
+}
+
+/* TAGS */
+
+.tag{
+    font-size:.75rem;
+    padding:0.35em 0.75em;
+}
+
+/* VIGENTE */
+
+.tag-activo{
+    background:#e6f4ea;
+    color:#1e7e34;
+}
+
+/* HOY */
+
+.tag-hoy{
+    background:#fff3cd;
+    color:#856404;
+}
+
+/* VENCIDO */
+
+.tag-vencido{
+    background:#fdecea;
+    color:#a94442;
+}
+
+/* HOVER SUAVE */
+
+.tabla-convocatorias tbody tr:hover{
+    background:#f8fafc;
+}

@@ -1,0 +1,9 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+.rounded-custom {
+    border-radius: 2rem;
+}
+.rounded-card {
+    border-radius: 1.5rem;
+}

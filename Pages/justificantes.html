@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Justificantes</title>
+		<!-- estilos Bulma -->
+		<link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+        <!-- estilos propios -->
+		<link rel="stylesheet" type="text/css" href="../sources/estilos.css">
+		<!-- iconos -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Alpine.js -->
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="layout">
+
+			<div class="container box barratitulo is-flex is-align-items-center is-justify-content-center">
+				<span id="barratitulo" class="has-text-white has-text-weight-medium is-size-6-tablet">
+					Calendario para captura de justificantes en el Subsistema de Recursos Humanos (SsRH) y entrega de documentación de asistencia a la Dirección de Personal
+				</span>
+			</div>
+
+
+			<div class="main" x-data="{ tab: 'calendario' }">
+
+			<section class="section tabs-fijas mt-0 pt-2">
+				<div class="container ">		
+					<div class="tabs is-boxed is-centered">
+						<ul>
+							<li :class="{ 'is-active': tab === 'calendario' }">
+								<a @click="tab = 'calendario'">
+									<span class="icon is-small">
+										<i class="fa-regular fa-calendar-days"></i>
+									</span>
+									<span class="tab-text">Calendario</span>
+								</a>
+							</li>
+
+							<li :class="{ 'is-active': tab === 'consideraciones' }">
+								<a @click="tab = 'consideraciones'">
+									<span class="icon is-small">
+										<i class="fa-regular fa-note-sticky"></i>
+									</span>
+									<span class="tab-text">Consideraciones</span>
+								</a>
+							</li>
+
+							<li :class="{ 'is-active': tab === 'tabla' }">
+								<a @click="tab = 'tabla'">
+									<span class="icon is-small">
+										<i class="fa-solid fa-table-list"></i>
+									</span>
+									<span class="tab-text">Matriz de Justificaciones</span>
+								</a>
+							</li>
+
+							<li :class="{ 'is-active': tab === 'Imprimir' }">
+								<a href="https://www.uv.mx/dgrh/files/2026/01/Calendario-para-la-captura-de-justificantes-en-el-Subsistema-de-Recursos-Humanos-SsRH-y-la-entrega-de-documentacion-de-asistencia-a-la-DP-2026-FR-1.pdf" target="_blank">
+									<span class="icon is-small">
+										<i class="fa-regular fa-file-pdf"></i>
+									</span>
+									<span class="tab-text">PDF</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- CONTENIDO -->
+			<section class="section mt-0 pt-3 contenido-scroll">
+				<div class="container">
+				
+					<div class="box" x-data="fechasApp()">
+					
+						<div x-show="tab === 'calendario'">
+							
+							<div class="notification is-info is-light">
+								<p><span class="has-text-weight-bold">El Subsistema de Recursos Humanos (SsRH) permanece disponible de forma continua y el registro de justificantes
+								no está condicionado, siempre y cuando correspondan a una quincena posterior y que no excedan la fecha límite de
+								registro</span>, es decir, la captura podrá efectuarse de manera anticipada desde que se cuente con el documento
+								justificativo correspondiente y hasta la fecha límite establecida en el presente calendario.</p>
+							</div>
+							
+							<div class="is-hidden-mobile">
+								<table class="table is-bordered is-fullwidth tabla-simetrica" id="tablaFechas">
+									<thead>
+										<tr>
+											<th>Quincena que se justifica</th>
+											<th>Fechas límite de registro de justificante en el SsRH y entrega de documentación</th>
+											<th>Quincena en la que se aplica el descuento</th>
+										</tr>
+									</thead>
+									<tbody>
+										<template x-for="item in datos" :key="item.titulo">
+											<tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha), 'has-background-warning': esHoy(item.fecha) }">
+												<td x-text="item.titulo"></td>
+												<td x-text="item.fechaTexto"></td>
+												<td x-text="item.fechaNomina"></td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+							</div>
+							
+
+							<div id="cardsFechas" class="is-hidden-tablet">
+								<template x-for="item in datos" :key="item.titulo">
+									<div class="card mb-2"
+										:class="{ 'has-background-grey-lighter has-text-grey': esVencida(item.fecha), 'has-background-warning': esHoy(item.fecha) }">
+										<div class="card-content py-2">
+											<span class="is-size-6">Quincena que se justifica: </span><p class="has-text-weight-semibold" x-text="item.titulo"></p>
+											<span class="is-size-6">Fechas límite de registro: </span><p class="has-text-weight-semibold" x-text="item.fechaTexto"></p>
+											<span class="is-size-6">Quincena en la que se aplica el descuento: </span><p class="has-text-weight-semibold" x-text="item.fechaNomina"></p>
+										</div>
+									</div>
+								</template>
+							</div>
+
+							<div class="notification has-text is-size-7 is-danger is-light mt-2 p-2">
+								<p>
+									*Fecha susceptible a cambios una vez que se publique la Circular para Cierre Contable-Presupuestal del Ejercicio 2026 o cierres de nóminas
+									anticipadas por los periodos vacacionales.
+									<br>
+									**Susceptible de cambio por tiempos de flujo del proceso de nómina.
+									<br>
+									Si los renglones se encuentran en color gris significa que el periodo de registro o entrega ha vencido.
+								</p>
+								<p><span class="has-text-weight-bold">Fecha de emisión:</span> 22/01/2026</p>
+							</div>
+
+						</div>
+					
+					<div x-show="tab === 'consideraciones'">
+						<p>La persona titular de la entidad académica o dependencia, de la administración o persona habilitada para realizar
+						   funciones de administrador y los usuarios que gestionen personal y que registren trámites-operaciones en el
+						   Subsistema de Recursos Humanos (SsRH), son responsables y deberán atender lo siguiente:</p>
+						<br>
+						<ol class="lista-negrita px-6" type="A">
+							<li>Respetar los plazos establecidos en el presente calendario.</li>
+							<li> Verificar que todas las solicitudes de permisos que justifiquen la ausencia de las personas trabajadoras, de acuerdo
+								 con el modelo de administración (tipo de personal), cuenten con el visto bueno de:</li>
+								<ol class="lista-negrita px-6" type="a">
+									<li><span class="has-text-weight-bold"> Personal administrativo, técnico y manual, confianza y eventual</span> – Administrador, Personal
+										habilitado para realizar las funciones de administrador, jefe inmediato o el titular de la entidad académica o dependencia.</li>
+									<li><span class="has-text-weight-bold">Personal académico</span> – Secretario de Facultad o el Titular de la entidad académica.</li>
+									<li><span class="has-text-weight-bold">Mandos medios y superiores</span> (incapacidades) – Jefe inmediato superior</li>
+								</ol>
+							</li>
+							<li>Confirmar que las incapacidades médicas contengan el sello de recibido de la entidad académica o dependencia,
+								en un espacio donde no afecte la lectura de los textos, en caso limitativo, en el reverso del documento; que se
+								capturen en el SsRH y se entreguen en original en la ventanilla única de oficialía de partes de la DGRH.</li>
+							<li>Resguardar la documentación original que respalde las justificaciones capturadas en el SsRH de manera puntual,
+								ordenada y mantenerla disponible para su consulta en caso de requerimiento de los entes fiscalizadores, por un
+								periodo mínimo de 10 años.</li>
+							<li>Observar lo establecido en la Matriz de Justificaciones SsRH - RCA (anexo 1) para la captura en el SsRH.</li>
+
+							<p class="has-text-weight-bold my-4">Consideraciones particulares</p>
+							
+							<li>Los medios para la notificación de las justificaciones según el modelo de administración son:</li>
+								<ol class="lista-negrita px-6" type="a">
+									<li><span class="has-text-weight-bold">Para el personal administrativo, técnico y manual, confianza y eventual</span>, deberán capturarse
+										en el módulo de Registro y control de asistencia del SsRH, indistintamente del medio a través del cual
+										registren su asistencia (huella digital, tarjeta o lista de asistencia). Las justificaciones capturadas en el
+										sistema no deberán enviarse a través del Sistema de Administración y Seguimiento de Correspondencia
+										(Hermes).</li>
+									<li><span class="has-text-weight-bold">Para el personal académico</span>, deberán ser notificadas a través de documento y entregarlo al
+										representante sindical de la entidad académica, mismas que deberán ser remitidas a la Dirección de
+										Personal por el FESAPAUV, de conformidad a lo establecido en la Cláusula 84 del Contrato Colectivo
+										de Trabajo.</li>
+									<li><span class="has-text-weight-bold">Para Mandos medios y superiores</span>, las incapacidades médicas, deberán capturarse en el módulo de
+										Registro y control de asistencia del SsRH y entregarlas físicamente en la ventanilla de Oficialía de Partes de la DGRH.  </li>
+								</ol>
+							<li>Elaborar el 'Reporte Quincenal de Incidencias de Personal Eventual' y entregarlo en la ventanilla de Oficialía de Partes
+								de la DGRH, basándose en las tarjetas o listas de asistencia de la quincena correspondiente.</li>
+							<li>Informar a la DGRH a través de <span class="has-text-weight-bold">HERMES</span> (cuenta <span class="has-text-link">dgrh@uv.mx</span>), cuando el personal administrativo, técnico,
+								manual o de confianza exceda sus permisos económicos, adjuntando el permiso excedido correspondiente.</li>
+							<li>Entregar a la Comisión Mixta de Control de Asistencia las tarjetas de control de asistencia del personal
+								administrativo, técnico y manual, con la documentación adjunta generada en la quincena correspondiente.</li>
+						</ol>
+					</div>	
+
+					<div x-show="tab === 'tabla'">
+						<div class="is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
+							<p class="has-text-weight-bold is-size-5">Anexo 1</p>
+							<p class="has-text-weight-bold is-size-6">Matriz de Justificaciones</p>
+						</div>
+						
+						<section class="section mt-0 pt-1">
+							<div class="container">
+								<div class="table-container">
+									<table class="table is-bordered is-hoverable is-fullwidth">
+									<thead>
+										<tr>
+											<th class="has-background-grey-lighter" colspan="2">RCA: JUSTIFICACIONES</th>
+											<th class="th-azul" colspan="2">MMyS</th>
+											<th class="th-azul" colspan="2">ATyM</th>
+											<th class="th-azul"colspan="2">Confianza</th>
+											<th class="th-azul"colspan="2">Eventual</th>
+											<th class="has-background-grey-lighter" rowspan="2">Criterios</th>
+										</tr>
+										<tr>
+											<th class="has-background-grey-lighter">Cve.</th>
+											<th class="has-background-grey-lighter">Descripción de justificación</th>
+											<th class="has-background-info-light">Usuario que captura en SsRH</th>
+											<th class="has-background-info-light">EAoD envía a DGRH/ Resguarda EAoD</th>
+											<th class="has-background-info-light">Usuario que captura en SsRH</th>
+											<th class="has-background-info-light">EAoD envía a DGRH/ Resguarda EAoD</th>
+											<th class="has-background-info-light">Usuario que captura en SsRH</th>
+											<th class="has-background-info-light">EAoD envía a DGRH/ Resguarda EAoD</th>
+											<th class="has-background-info-light">Usuario que captura en SsRH</th>
+											<th class="has-background-info-light">EAoD envía a DGRH/ Resguarda EAoD</th>
+
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td>AMO</td><td>AMONESTACIÓN</td>
+											<td class="has-background-white-ter">DP</td><td class="has-background-white-ter">Resguarda EAoD</td>
+											<td>Administrador</td><td>Resguarda EAoD</td>
+											<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+											<td>Administrador</td><td>Resguarda EAoD</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>CC</td><td>COMISIÓN POR CAPACITACIÓN</td>
+											<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+											<td>DP</td><td>SETSUV</td>
+											<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+											<td>Administrador</td><td>Resguarda EAoD</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>CCE</td><td>COMISIÓN POR CAPACITACIÓN ENTRADA</td>
+											<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+											<td>DP</td><td>SETSUV</td>
+											<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+											<td>Administrador</td><td>Resguarda EAoD</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>CCEM</td><td>COMISIÓN POR CAPACITACIÓN ENTRADA MATUTINO</td>
+											<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+											<td>DP</td><td>SETSUV</td>
+											<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+											<td>Administrador</td><td>Resguarda EAoD</td>
+											<td></td>
+										</tr>
+											<tr>
+												<td>CCEV</td><td>COMISIÓN POR CAPACITACIÓN ENTRADA VESPERTINO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>DP</td><td>SETSUV</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>CCS</td><td>COMISIÓN POR CAPACITACIÓN SALIDA</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>DP</td><td>SETSUV</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>CCSM</td><td>COMISIÓN POR CAPACITACIÓN SALIDA MATUTINO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>DP</td><td>SETSUV</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>CCSV</td><td>COMISIÓN POR CAPACITACIÓN SALIDA VESPERTINO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>DP</td><td>SETSUV</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>DE</td><td>DIA ECONOMICO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>N/A</td><td>N/A</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>EXH</td><td>EXHORTO</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td>Se captura el día que se entrega al trabajador</td>
+											</tr>
+											<tr>
+												<td>IG</td><td>INCAPACIDAD POR GRAVIDEZ</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">EAoD envía a DGRH</td>
+												<td>Administrador</td><td>EAoD envía a DGRH</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">EAoD envía a DGRH</td>
+												<td>Administrador</td><td>EAoD envía a DGRH</td>
+											<td></td>
+											</tr>
+											<tr>
+												<td>IM</td><td>INCAPACIDAD MEDICA</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">EAoD envía a DGRH</td>
+												<td>Administrador</td><td>EAoD envía a DGRH</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">EAoD envía a DGRH</td>
+												<td>Administrador</td><td>EAoD envía a DGRH</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>JAA</td><td>JUSTIF. ADMON. O ACADEMICA</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>N/A</td><td>N/A</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td>Aplica para personal con jornada continua y discontinua</td>
+											</tr>
+											<tr>
+												<td>JAAE</td><td>JUSTIF. ADMON. O ACADEMICA ENTRADA</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>N/A</td><td>N/A</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td>Aplica para personal con jornada continua</td>
+											</tr>
+											<tr>
+												<td>JAAS</td><td>JUSTIF. ADMON. O ACADEMICA SALIDA</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>N/A</td><td>N/A</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>JAAEM</td><td>JUSTIF. ADMON. O ACADEMICA ENTRADA MATUTINO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>N/A</td><td>N/A</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td>Aplica para personal con jornada discontinuas</td>
+											</tr>
+											<tr>
+												<td>JAAEV</td><td>JUSTIF. ADMON. O ACADEMICA ENTRADA VESPERTINO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>N/A</td><td>N/A</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>JAASM</td><td>JUSTIF. ADMON. O ACADEMICA SALIDA MATUTINO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>N/A</td><td>N/A</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>JAASV</td><td>JUSTIF. ADMON. O ACADEMICA SALIDA VESPERTINO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>N/A</td><td>N/A</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>Administrador</td><td>Resguarda EAoD</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>RT</td><td>RIESGO DE TRABAJO</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>Administrador</td><td>EAoD envía a DGRH</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>N/A</td><td>N/A</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>VAD</td><td>VACACIONES ADICIONALES DISFRUTADOS</td>
+												<td class="has-background-white-ter">N/A</td><td class="has-background-white-ter">N/A</td>
+												<td>DP</td><td>SETSUV</td>
+												<td class="has-background-white-ter">Administrador</td><td class="has-background-white-ter">Resguarda EAoD</td>
+												<td>N/A</td><td>N/A</td>
+												<td></td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+
+					</div>
+
+				</div>
+			</div>		
+			</section>
+		</div>
+		
+	</div>
+		<script src="../sources/justificantes.js"></script>
+    </body>
+</html>

@@ -1,0 +1,205 @@
+body {
+    background-color: rgb(224, 246, 255);
+}
+
+h1{
+    color: #18529D;
+}
+
+h3{
+    color:#18529D;
+    padding-left: .5rem;
+}
+
+.tituloAcad {
+    background: linear-gradient(to right, #18529D,#18529D, #28AD56, #18529D, #18529D);
+    height: 2rem;
+}
+
+.tituloSEA {
+    background: linear-gradient(to right, #18529D,#18529D, purple, #18529D, #18529D);
+    height: 2rem;
+}
+
+.tituloConf {
+    background: linear-gradient(to right, #18529D,#18529D, orange, #18529D, #18529D);
+    height: 2rem;
+}
+
+.tituloATM {
+    background: linear-gradient(to right, #18529D,#18529D, #BD0808, #18529D, #18529D);
+    height: 2rem;
+}
+
+
+.fondo {
+    background-image: url('../Public/ribbon2.svg');
+    background-color:white;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: content;
+    background-position: top;
+}
+
+.fondo2 {
+    background-color:white;
+    background-attachment: fixed;
+}
+
+.logo{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    min-width: 25%;
+    max-width: 50%;
+}
+
+.contenido {
+    background: white;
+}
+
+@media (max-width: 767.98px) { /* XS y SM */
+  .container {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.icono {
+    font-size: 1.5rem;
+    color: red;
+    cursor: pointer;
+}
+
+.icono-azul {
+    color: #18529D !important;
+    cursor: pointer;
+}
+
+.icono-verde {
+    color: #28AD56 !important;
+    cursor: pointer;
+}
+ 
+#calendario {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#calendario .jsCalendar {
+    display : inline-block;
+}
+
+.descansos{
+    background-color: #cecece;
+}
+
+.btndescanso {
+    background-color: #c0c0c0;
+    border-color: rgb(155, 155, 154);
+}
+
+.btndescanso:checked {
+    background-color: rgb(148, 148, 148);
+    border-color: rgb(148, 148, 148);
+}
+
+.btndescanso:focus {
+    border-color: rgb(148, 148, 148);
+}
+
+.btndescanso:focus:not(:checked) {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23b1b1b1'/%3e%3c/svg%3e") !important;
+}
+
+.festivos{
+    background-color:#FFFF00;
+}
+
+.btnfestivo {
+    background-color: #c0c0c0;
+    border-color: #FFFF00;
+}
+
+.btnfestivo:checked {
+    background-color: #FFFF00;
+    border-color: #a8a82a;
+}
+
+.btnfestivo:focus {
+    border-color: #a8a82a;
+}
+
+.btnfestivo:focus:not(:checked) {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23FFFF00'/%3e%3c/svg%3e") !important;
+}
+
+.vacaciones{
+    background-color: #92D050;
+}
+
+.btnvacaciones {
+    background-color: #c0c0c0;
+    border-color: #92D050;
+}
+
+.btnvacaciones:checked {
+    background-color: #92D050;
+    border-color: #5ca80a;
+}
+
+.btnvacaciones:focus {
+    border-color: #5ca80a;
+}
+
+.btnvacaciones:focus:not(:checked) {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2392D050'/%3e%3c/svg%3e") !important;
+}
+
+.inhabiles{
+    background-color: #FFC000;
+}
+
+.btninhabil {
+    background-color: #c0c0c0;
+    border-color: #FFC000;
+}
+
+.btninhabil:checked {
+    background-color: #FFC000;
+    border-color: #F08C6A;
+}
+
+.btninhabil:focus {
+    border-color: #F08C6A;
+}
+
+.btninhabil:focus:not(:checked) {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23FFC000'/%3e%3c/svg%3e") !important;
+}
+
+.leyenda {
+    text-align: left; 
+    font-size: 14px; 
+    padding-left: 40px;
+    padding-bottom: 20px;
+}
+
+.otro-mes {
+  color: transparent;        /* hace el texto invisible */
+  background: none;
+  /*border: none;*/
+}
+
+.pt-60 { padding-top: 60px !important; }
+
+
+.mi-div-svg {
+  width: 100%;
+  min-height: 100px;
+  background-color:white;
+  background-image: url('../public/ribbon2.svg');
+  background-size:auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}

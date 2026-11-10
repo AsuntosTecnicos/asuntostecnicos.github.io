@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Trámites</title>
+    <link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <!-- estilos propios -->
+	<link rel="stylesheet" type="text/css" href="../sources/cssTramites.css">
+    <!-- Alpine.js -->
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+
+    <div class="container" x-data="portalTramites()">
+        <nav class="breadcrumb is-centered mt-4" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="tramites.html">Inicio</a></li>
+                <li class="is-active"><a href="#" x-text="tituloSeccion"></a></li>
+            </ul>
+        </nav>
+        <div class="columns is-centered">
+            <div class="column is-9">
+                <nav class="panel is-link">
+                    <p class="panel-heading bg-azul" x-text="tituloSeccion"></p>
+
+                    <div class="box">
+                        <div class="columns is-vcentered">
+                            <div class="column is-12">
+                                <div class="field">
+                                    <div class="control has-icons-left">
+                                        <input 
+                                            class="input" 
+                                            type="text" 
+                                            placeholder="Buscar trámite..." 
+                                            x-model="search"
+                                        >
+                                        <span class="icon is-left">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="column is-6">
+                                <div class="field">
+                                    <div class="control has-icons-left">
+                                        <div class="select is-fullwidth">
+                                            <select x-model="filtroArea">
+                                                <option value="todas">Todas las áreas</option>
+                                                <template x-for="(info, nombre) in areas" :key="nombre">
+                                                    <option :value="nombre" x-text="nombre"></option>
+                                                </template>
+                                            </select>
+                                        </div>
+                                        <div class="icon is-left">
+                                            <i class="fas fa-building"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+
+                    <template x-if="cargando">
+                        <div class="p-4">
+                            <div class="is-loading-skeleton"></div>
+                            <div class="is-loading-skeleton"></div>
+                            <div class="is-loading-skeleton"></div>
+                        </div>
+                    </template>
+
+                    <div x-show="!cargando" class="fade-in">
+                    <template x-for="tramite in filteredTramites" :key="tramite.id">
+                        <div class="panel-block is-block" :class="rubros[tramite.rubro].border">
+                            <div class="columns is-vcentered is-mobile">
+                                <div class="column">
+                                    <div class="is-flex is-align-items-center mb-2">
+                                        <span class="tag is-light is-medium" :class="rubros[tramite.rubro].color">
+                                            <span x-text="tramite.rubro"></span>
+                                        </span>
+                                    </div>
+                                    <p class="title is-5 mb-1" x-text="tramite.nombre"></p>
+                                    <p class="subtitle is-6 has-text-grey" x-text="tramite.resumen"></p>
+                                </div>
+                                <div class="column is-narrow">
+                                    <button class="button is-rounded is-small bg-azul" @click="window.location.href = 'trDetalle.html?id=' + tramite.id">
+                                        Detalle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    </div>
+
+                    <div class="panel-block has-text-centered" x-show="filteredTramites.length === 0">
+                        <p class="has-text-grey">No se encontraron trámites con ese nombre.</p>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="has-text-centered mt-5">
+        <a href="tramites.html" class="button is-text">
+            <span class="icon"><i class="fas fa-arrow-left"></i></span>
+            <span>Volver a las categorías</span>
+        </a>
+    </div>
+    <script src="../sources/datosTr.js"></script> 
+    <script src="../sources/jsTramites.js"></script>
+</body>
+</html>

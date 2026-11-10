@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>Calendarios laborales</title>
+		<meta name="description" content="Calendarios laborales 2027 - Universidad Veracruzana">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Victor Martínez basado en jsCalendar de GramThanos">
+
+		<!--bootstrap-->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+		<!-- jsCalendar -->
+		<link rel="stylesheet" type="text/css" href="../source/jsCalendar.css">
+		<script type="text/javascript" src="../source/jsCalendar.js"></script>
+		<script type="text/javascript" src="../source/jsCalendar.lang.es.js"></script>
+		<!-- estilos propios -->
+		<link rel="stylesheet" type="text/css" href="../source/estilo.css">
+
+
+	</head>
+	
+	<body>
+		<header class="fixed-top">
+			<div class="container fondo">
+				
+				<!-- Fila principal -->
+				<div class="row align-items-end d-none d-md-flex" id="dos">
+					<div class="col-4 text-start">
+						<h1>Calendarios<br>Laborales <b>2027</b></h1>
+					</div>
+					<div class="col-4 text-center">
+						<img class="logo" src="../Public/Logo_emisor_SAF_DGRH_mini.png">
+					</div>
+					<div class="col-4 text-end">
+						<a id="color" class="icono-verde" data-toggle="tooltip" title="Cambiar color" onclick="cambiarColor()"><i class="bi bi-brush-fill" style="font-size: 1.5rem;"></i></a>
+						<a data-toggle="tooltip" title="Versión para imprimir" onclick="abrirPdf()"><i class="bi bi-filetype-pdf icono"></i></a>
+					</div>
+				</div>
+				
+				<!-- móviles -->
+				<div class="row d-flex d-md-none align-items-end">
+					<div class="col-6 text-start">
+						<h3 class="text-dark">Calendarios <b>2027</b></h3>
+					</div>
+					<div class="col-6 text-end">
+						<a id="color_mn" class="icono-verde" data-toggle="tooltip" title="Cambiar color" onclick="cambiarColor()"><i class="bi bi-brush-fill" style="font-size: 1.5rem;"></i></a>
+						<a data-toggle="tooltip" title="Versión para imprimir" onclick="abrirPdf()"><i class="bi bi-filetype-pdf icono"></i></a>
+					</div>
+				</div>
+			</div>	
+			<div class="container fondo2">
+				<!-- Botones de tipo de personal -->
+				<div class="btn-group w-100 mt-3" role="group" aria-label="Selección de calendario">
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="Seleccion('acad')" checked>
+					<label class="btn btn-outline-success" for="btnradio1">Académico</label>
+
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="Seleccion('conf')">
+					<label class="btn btn-outline-warning" for="btnradio2">Confianza</label>
+
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="Seleccion('sea')">
+					<label class="btn btn-outline-primary" for="btnradio3">Académico (SEA)</label>
+
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" onclick="Seleccion('atm')">
+					<label class="btn btn-outline-danger" for="btnradio4">Administrativo, Técnico y Manual</label>
+				</div>
+
+				<!-- Título del calendario -->
+				<div id="backtitulo" class="d-flex d-none d-md-flex justify-content-center align-items-center rounded p-3 mt-3 text-white tituloAcad">
+					<span id="barratitulo" class="fs-5 fw-medium">Título del Año</span>
+				</div>
+				<br>
+				
+			</div>
+		</header>
+		
+
+		<div class="container contenido">
+			<!--Aqui se despliega el calendario-->
+			<div id="calendario"></div>
+			
+			<!--Botones de tipo de días-->
+			<div class="d-flex justify-content-center gap-5 flex-wrap my-3">
+				<div class="form-check form-switch">
+					<input class="form-check-input btndescanso" type="checkbox" role="switch" id="descansos" onclick="Seldescansos()" checked>
+					<label class="form-check-label" for="switchCheckDefault">Descansos</label>
+				</div>
+				<div class="form-check form-switch">
+					<input class="form-check-input btnfestivo" type="checkbox" role="switch" id="festivos" onclick="Selfestivos()" checked>
+					<label class="form-check-label" for="switchCheckChecked">Festivos</label>
+				</div>
+				<div class="form-check form-switch">
+					<input class="form-check-input btnvacaciones" type="checkbox" role="switch" id="vacaciones" onclick="Selvacaciones()" checked>
+					<label class="form-check-label" for="switchCheckDisabled">Vacaciones</label>
+				</div>
+				<div class="form-check form-switch" id="btinhabil">
+					<input class="form-check-input btninhabil" type="checkbox" role="switch" id="inhabiles" onclick="Selinhabiles()" checked>
+					<label class="form-check-label" for="switchCheckCheckedDisabled">Inhábiles</label>
+				</div>
+			</div>
+
+			<!--Leyendas finales-->
+			<div class="leyenda" id="leyenda">
+				<b>Inicio de labores 2028</b>: lunes 03 de enero de 2028.<br>
+				<b>Fecha de actualización</b>: <a >14/08/2026</a>.
+			</div>
+			<div class="leyenda" id="leyendasea">
+				<b>Inicio de labores</b>: miercoles 05 de enero de 2028.<br>
+				<b>Nota</b>: El período vacacional de invierno se complementa con el día 04 de enero de 2028.<br>
+				<b>Fecha de actualización</b>: <a >14/08/2026</a>.
+			</div>	
+
+		</div>
+		
+		<script src="../source/formato.js"></script>
+		<script src="../source/anual.js"></script>
+	</body>
+</html>

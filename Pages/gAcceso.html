@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos de Acceso - Vista Dinámica | Universidad Veracruzana</title>
+    <!-- Tailwind CSS for modern responsive layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        uvGreen: 'rgb(40, 173, 86)',
+                        uvBlue: 'rgb(24, 82, 157)',
+                        uvGreenHover: 'rgb(33, 145, 71)',
+                        uvBlueHover: 'rgb(18, 65, 126)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-animation {
+            animation: fadeInScale 0.25s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[rgb(24,82,157)] to-[rgb(40,173,86)] flex items-center justify-center text-white shadow-md">
+                        <i class="fa-solid fa-layer-group text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-[rgb(24,82,157)]">Dirección General de Recursos Humanos</span>
+                        <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Grupos de Acceso</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg px-4 py-2 text-sm text-[rgb(24,82,157)]">
+                        <span class="font-medium">Número de Grupos:</span>
+                        <span id="total-groups-badge" class="font-bold ml-1">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+        <!-- Search Bar -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div class="w-full md:w-2/3 relative">
+                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre de grupo o dependencia asociada..." class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[rgb(24,82,157)] focus:bg-white text-sm transition-all">
+                </div>
+                <div class="text-xs text-gray-500 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-[rgb(24,82,157)] inline-block"></span> Haz clic en un grupo para ver dependencias
+                </div>
+            </div>
+        </div>
+
+        <!-- Regional Tabs -->
+        <div class="mb-6 overflow-x-auto pb-2">
+            <nav id="regionTabs" class="flex space-x-2 min-w-max border-b border-gray-200" aria-label="Tabs">
+                <!-- Injected via JS -->
+            </nav>
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="regionTabContent" class="space-y-6">
+            <!-- Injected via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="globalEmptyState" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-gray-300 mt-4">
+            <div class="w-16 h-16 bg-blue-50 text-[rgb(24,82,157)] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800">No se encontraron grupos o dependencias</h3>
+            <p class="text-sm text-gray-500 mt-1">Intenta verificar los términos de búsqueda ingresados.</p>
+        </div>
+    </main>
+
+    <!-- Modal Dialog for Dependencies -->
+    <div id="groupModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden modal-backdrop">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden modal-animation border border-gray-100">
+            <div class="bg-gradient-to-r from-[rgb(24,82,157)] to-[rgb(33,145,71)] px-6 py-4 text-white flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-users-rectangle"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-wider text-white/80 font-medium">Grupo de Acceso</span>
+                        <h3 id="modalGroupName" class="text-lg font-bold">Nombre del Grupo</h3>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="text-white/80 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[60vh] overflow-y-auto">
+                <div class="mb-3 flex items-center justify-between">
+                    <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Dependencias Asociadas</span>
+                    <span id="modalCountBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-[rgb(40,173,86)] border border-emerald-100">0 dependencias</span>
+                </div>
+                <ul id="modalDependenciesList" class="space-y-3">
+                    <!-- Injected via JS -->
+                </ul>
+            </div>
+            <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-end">
+                <button onclick="closeModal()" class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-semibold rounded-xl transition-colors">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white mt-12 py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Universidad Veracruzana</span>
+            </div>
+            <p class="text-sm text-gray-400">Dirección General de Recursos Humanos &bull; Departamento de Asuntos Técnicos</p>
+            <!--<div class="text-xs text-gray-500">&copy; 2026 Todos los derechos reservados</div>-->
+        </div>
+    </footer>
+
+    <script src="../source/gAcceso.js"></script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGRH / Departamento de Asuntos Técnicos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./Sources/css/home.css">
+
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        theme: {
+                            dark: '#0f172a',        // slate-900
+                            navy: '#1e3a8a',        // blue-900
+                            blue: '#2563eb',        // blue-600
+                            sky: '#e0f2fe',         // sky-100
+                            teal: '#0d9488',        // teal-600
+                            mint: '#ccfbf1',        // teal-100
+                            green: '#16a34a',       // green-600
+                            softGreen: '#f0fdf4',   // green-50
+                            softBlue: '#f0f9ff'     // sky-50
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+</head>
+<body class="bg-theme-navy text-slate-800 antialiased">
+
+    <!-- MENÚ SUPERIOR (NAVEGACIÓN POR SECCIONES) -->
+    <header class="sticky top-0 z-50 bg-theme-green backdrop-blur-md border-b border-sky-100 shadow-sm py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <a href="#" class="flex items-center gap-3">
+                <div class="mt-2 w-20 h-20">
+                    <img src="./Public/Logosimbolo_mini_fo.png">
+                </div>
+                <div class="ml-2">
+                    <span class="text-3xl font-bold text-theme-navy tracking-tight block leading-none">Departamento de Asuntos Técnicos</span>
+                    <span class="text-lg text-white font-medium tracking-wide">Dirección General de Recursos Humanos</span>
+                </div>
+            </a>
+
+            <!-- Menú de Navegación Estilo Píldora Verde / Azul -->
+            <nav class="hidden md:flex items-center bg-theme-sky border border-theme-navy px-6 py-2 rounded-full space-x-6 text-sm font-semibold text-theme-navy">
+                <a href="#sec-1" class="hover:text-theme-teal transition-colors">Terminales</a>
+                <a href="#sec-2" class="hover:text-theme-teal transition-colors">Correspondencia</a>
+                <a href="#sec-3" class="hover:text-theme-teal transition-colors">Calendarios</a>
+                <a href="#contacto" class="hover:text-theme-teal transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Botón Menú Móvil -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-theme-navy hover:text-theme-teal focus:outline-none">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-sky-100 px-4 pt-2 pb-4 space-y-2 text-center font-medium">
+            <a href="#sec-1" class="block py-2 text-theme-navy hover:bg-theme-mint rounded-lg">Terminales</a>
+            <a href="#sec-2" class="block py-2 text-theme-navy hover:bg-theme-mint rounded-lg">Correspondencia</a>
+            <a href="#sec-3" class="block py-2 text-theme-navy hover:bg-theme-mint rounded-lg">Calendarios</a>
+            <a href="#contacto" class="block py-2 text-theme-navy hover:bg-theme-mint rounded-lg">Contacto</a>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12">
+
+        <!-- SECCIÓN 1: BANNER PRINCIPAL / HERO (Basado en el rectángulo superior de la imagen) 
+        <section id="sec-1" class="bg-white border-2 border-theme-blue/20 rounded-custom p-8 md:p-12 relative overflow-hidden shadow-sm">
+            <span class="inline-block text-xs font-semibold uppercase tracking-wider text-theme-blue bg-sky-100 px-3 py-1 rounded-full mb-3">
+                Subtítulo de Bienvenida
+            </span>
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+                <div>
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-theme-navy leading-tight tracking-tight">
+                        Título 1 <br/>
+                        <span class="text-theme-blue">Título Complementario</span>
+                    </h1>
+                </div>
+                <div class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                    <span class="text-theme-navy">Subtítulo 1. </span>
+                    <span class="text-theme-teal">Subtítulo 2. </span>
+                    <span class="text-theme-green">Subtítulo 3.</span>
+                </div>
+            </div>
+        </section>
+
+        SECCIÓN 2: CONTENIDO A (Grid a 2 columnas replicando la imagen original)
+        <section id="sec-2" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            <div class="lg:col-span-7 bg-slate-200 rounded-custom overflow-hidden min-h-[380px] relative group shadow-sm flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200" 
+                     alt="Imagen genérica" 
+                     class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                     onerror="this.src='https://placehold.co/800x600/e0f2fe/1e3a8a?text=Contenedor+de+Imagen+Seccion+2'">
+                <div class="absolute inset-0 bg-gradient-to-t from-theme-navy/30 via-transparent to-transparent"></div>
+            </div>
+
+            
+            <div class="lg:col-span-5 bg-theme-mint border border-theme-teal/20 rounded-custom p-8 md:p-10 flex flex-col justify-between relative overflow-hidden shadow-sm">
+                <div class="space-y-4 z-10">
+                    <h2 class="text-2xl md:text-3xl font-bold text-theme-navy">Título de la Tarjeta 1</h2>
+                    <p class="text-slate-700 text-lg leading-relaxed">
+                        Texto de párrafo genérico para describir el propósito de esta sección. Este bloque de texto explica de forma breve y precisa los conceptos principales, servicios o mensaje clave de la plantilla.
+                    </p>
+                </div>
+
+               
+                <div class="mt-8 flex justify-end items-end relative z-10">
+                    <div class="relative">
+                        <i data-lucide="sparkles" class="w-16 h-16 text-theme-teal transform -rotate-12 animate-pulse"></i>
+                        <div class="w-16 h-2 bg-theme-teal/20 rounded-full blur-sm mt-1"></div>
+                    </div>
+                </div>
+
+                
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-theme-teal/10 rounded-full blur-2xl"></div>
+            </div>
+        </section> -->
+
+        <!-- SECCIÓN 3: TARJETAS EN GRID -->
+        <section id="sec-1" class="pt-6">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-theme-teal font-bold uppercase tracking-wider text-xs">Categoría o Etiqueta</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-theme-navy mt-1">Título 2</h2>
+                <p class="text-slate-600 mt-2">Texto secundario genérico que introduce el contenido en tarjetas de esta sección.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tarjeta 1 -->
+                <div class="bg-white p-6 rounded-card border border-sky-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-sky-100 text-theme-blue rounded-2xl flex items-center justify-center mb-4">
+                        <i data-lucide="box" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-theme-navy mb-2">Subtítulo 2.1</h3>
+                    <p class="text-sm text-slate-600 mb-4">Texto descriptivo corto para la tarjeta número uno. Puedes colocar detalles técnicos, características o servicios.</p>
+                    <span class="text-xs font-semibold text-theme-teal bg-theme-mint px-3 py-1 rounded-full">Etiqueta A</span>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="bg-white p-6 rounded-card border border-sky-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-theme-mint text-theme-teal rounded-2xl flex items-center justify-center mb-4">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-theme-navy mb-2">Subtítulo 2.2</h3>
+                    <p class="text-sm text-slate-600 mb-4">Texto descriptivo corto para la tarjeta número dos. Puedes colocar detalles técnicos, características o servicios.</p>
+                    <span class="text-xs font-semibold text-theme-teal bg-theme-mint px-3 py-1 rounded-full">Etiqueta B</span>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="bg-white p-6 rounded-card border border-sky-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-theme-softGreen text-theme-green rounded-2xl flex items-center justify-center mb-4">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-theme-navy mb-2">Subtítulo 2.3</h3>
+                    <p class="text-sm text-slate-600 mb-4">Texto descriptivo corto para la tarjeta número tres. Puedes colocar detalles técnicos, características o servicios.</p>
+                    <span class="text-xs font-semibold text-theme-green bg-theme-softGreen px-3 py-1 rounded-full">Etiqueta C</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: BLOQUE DESTACADO / MÓDULOS -->
+        <section id="sec-2" class="bg-sky-50/80 rounded-custom p-8 md:p-12 border border-sky-100">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <span class="text-theme-blue font-bold uppercase tracking-wider text-xs">Módulo Especial</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-theme-navy mt-1">Título 3</h2>
+                </div>
+                <p class="text-slate-600 max-w-md mt-2 md:mt-0">Texto de apoyo genérico para describir las características del bloque 3.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="activity" class="w-8 h-8 text-theme-blue mb-3"></i>
+                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.1</h4>
+                    <p class="text-xs text-slate-600">Descripción genérica del primer ítem explicativo del módulo.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="compass" class="w-8 h-8 text-theme-teal mb-3"></i>
+                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.2</h4>
+                    <p class="text-xs text-slate-600">Descripción genérica del segundo ítem explicativo del módulo.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="bar-chart-3" class="w-8 h-8 text-theme-green mb-3"></i>
+                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.3</h4>
+                    <p class="text-xs text-slate-600">Descripción genérica del tercer ítem explicativo del módulo.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="zap" class="w-8 h-8 text-theme-blue mb-3"></i>
+                    <h4 class="text-lg font-bold text-theme-navy mb-1">Elemento 3.4</h4>
+                    <p class="text-xs text-slate-600">Descripción genérica del cuarto ítem explicativo del módulo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: PASOS / PROCESO -->
+        <section id="sec-3" class="bg-theme-mint/40 border border-theme-teal/20 rounded-custom p-8 md:p-12">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <span class="text-theme-teal font-bold uppercase tracking-wider text-xs">Flujo de Trabajo</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-theme-navy">Título 4</h2>
+                <p class="text-slate-700">Texto explicativo sobre el proceso o flujo de pasos simplificado:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left my-8">
+                    <div class="bg-white p-5 rounded-xl border border-sky-100 shadow-sm">
+                        <div class="w-8 h-8 bg-theme-blue text-white rounded-full flex items-center justify-center font-bold mb-3">1</div>
+                        <h4 class="font-bold text-theme-navy">Paso 1</h4>
+                        <p class="text-xs text-slate-600 mt-1">Texto descriptivo corto para la primera etapa del proceso.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-sky-100 shadow-sm">
+                        <div class="w-8 h-8 bg-theme-teal text-white rounded-full flex items-center justify-center font-bold mb-3">2</div>
+                        <h4 class="font-bold text-theme-navy">Paso 2</h4>
+                        <p class="text-xs text-slate-600 mt-1">Texto descriptivo corto para la segunda etapa del proceso.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-sky-100 shadow-sm">
+                        <div class="w-8 h-8 bg-theme-green text-white rounded-full flex items-center justify-center font-bold mb-3">3</div>
+                        <h4 class="font-bold text-theme-navy">Paso 3</h4>
+                        <p class="text-xs text-slate-600 mt-1">Texto descriptivo corto para la tercera etapa del proceso.</p>
+                    </div>
+                </div>
+
+                <div class="pt-2 flex flex-wrap justify-center gap-4">
+                    <a href="#contacto" class="bg-theme-navy hover:bg-theme-blue text-white font-bold px-8 py-3 rounded-full transition-colors shadow-sm">
+                        Botón Principal
+                    </a>
+                    <button class="bg-white border-2 border-theme-teal text-theme-teal hover:bg-theme-mint font-bold px-8 py-3 rounded-full transition-colors flex items-center gap-2">
+                        <i data-lucide="download" class="w-4 h-4"></i> Botón Secundario
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CONTACTO -->
+        <section id="contacto" class="bg-white rounded-custom p-8 md:p-12 border border-slate-200 shadow-sm">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Información de Contacto -->
+                <div class="lg:col-span-12 space-y-6">
+                    <div>
+
+                        <h2 class="text-3xl font-bold text-theme-navy mt-1">Información de Contacto</h2>
+                    </div>
+                    <p class="text-slate-600 text-sm">Contactate con nosotros a través de los siguientes medios.</p>
+
+                    <div class="space-y-4 text-sm text-slate-700">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-theme-mint text-theme-teal rounded-xl flex items-center justify-center shrink-0">
+                                <i data-lucide="phone" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-theme-navy">Teléfono</strong>
+                                (228) 842 - 17-00 extensiones 11100, 11053
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-theme-softGreen text-theme-green rounded-xl flex items-center justify-center shrink-0">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-theme-navy">Correo Electrónico</strong>
+                                asuntostecnicos@uv.mx
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-sky-100 text-theme-blue rounded-xl flex items-center justify-center shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-theme-navy">Ubicación</strong>
+                                Edificio A de Rectoria, Lomas del Estadio S/N, Col. Zona Universitaria; C.P. 91000; Xalapa, Veracruz, México.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="bg-theme-green text-white mt-16 py-12 border-t border-theme-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-theme-teal/30 text-theme-mint rounded-lg flex items-center justify-center">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                </div>
+                <span class="text-xl font-bold">Universidad Veracruzana</span>
+            </div>
+
+            <div class="flex flex-col text-slate-300 text-sm">
+                <span class="font-bold">Dirección General de Recursos Humanos</span>
+                <span>Departamento de Asuntos Técnicos</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LÓGICA DE INTERACCIÓN -->
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // Alternar menú desplegable en pantallas móviles
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Simulación de envío de formulario
+        function showFormSuccess() {
+            document.getElementById('generic-form').classList.add('hidden');
+            document.getElementById('form-success-msg').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

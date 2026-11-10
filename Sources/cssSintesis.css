@@ -1,0 +1,18 @@
+:root {
+	--azul: rgb(24,82,157);
+	--verde: rgb(40,173,86);
+}
+
+.bg-azul { background-color: var(--azul) !important; }
+
+.bg-verde { background-color: var(--verde) !important; }
+
+.card-profile { border-top: 5px solid var(--verde); }
+
+.tag-area { margin-right: 5px; margin-bottom: 5px; }
+
+.text-verde {color: var(--verde);}
+
+.table-container { margin-top: 2rem; }
+
+tr:hover { background-color: #f5f5f5; }

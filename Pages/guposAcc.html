@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos de Acceso y Dependencias - Universidad Veracruzana</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- estilos propios -->
+	<link rel="stylesheet" type="text/css" href="../sources/css/gruposAcc.css">
+    
+</head>
+<body>
+    <!-- Encabezado Institucional -->
+    <header class="header-uv text-center mb-4">
+        <div class="container">
+            <h2 class="display-7 fw-bold mb-2">Grupos de Acceso para Terminales Biométricas</h2>
+            <p class="display-8 fw-bold mb-0">Dirección General de Recursos Humanos</p>
+            <p class="display-8 mb-0">Departamento de Asuntos Técnicos</p>
+        </div>
+    </header>
+
+    <div class="container mb-5">
+        
+        <div class="d-flex flex-row mb-4">
+            <!-- Buscador general -->
+            <div class="col-8">
+                <div class="search-box">
+                    
+                    <input type="text" id="buscadorGeneral" class="form-control form-control-lg" placeholder="Buscar por grupo o dependencia...">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#infoModal">
+                        <i class="fa-solid fa-circle-info"></i> Información
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Pestañas de Regiones -->
+        <ul class="nav nav-pills justify-content-center mb-4 gap-2" id="regionTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active rounded-pill px-4" id="xalapa-tab" data-bs-toggle="pill" data-bs-target="#xalapa" type="button" role="tab">Xalapa</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-4" id="veracruz-tab" data-bs-toggle="pill" data-bs-target="#veracruz" type="button" role="tab">Veracruz</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-4" id="orizaba-tab" data-bs-toggle="pill" data-bs-target="#orizaba" type="button" role="tab">Orizaba-Córdoba</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-4" id="pozarica-tab" data-bs-toggle="pill" data-bs-target="#pozarica" type="button" role="tab">Poza Rica-Tuxpan</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-4" id="coatzacoalcos-tab" data-bs-toggle="pill" data-bs-target="#coatzacoalcos" type="button" role="tab">Coatzacoalcos-Minatitlán</button>
+            </li>
+        </ul>
+
+        <!-- Contenido de las Pestañas (Acordeones) -->
+        <div class="tab-content" id="regionTabsContent">
+            <!-- Xalapa -->
+            <div class="tab-pane fade show active" id="xalapa" role="tabpanel">
+                <div class="accordion" id="accordionXalapa"></div>
+            </div>
+            <!-- Veracruz -->
+            <div class="tab-pane fade" id="veracruz" role="tabpanel">
+                <div class="accordion" id="accordionVeracruz"></div>
+            </div>
+            <!-- Orizaba-Cordoba -->
+            <div class="tab-pane fade" id="orizaba" role="tabpanel">
+                <div class="accordion" id="accordionOrizaba"></div>
+            </div>
+            <!-- Poza Rica-Tuxpan -->
+            <div class="tab-pane fade" id="pozarica" role="tabpanel">
+                <div class="accordion" id="accordionPozarica"></div>
+            </div>
+            <!-- Coatzacoalcos-Minatitlan -->
+            <div class="tab-pane fade" id="coatzacoalcos" role="tabpanel">
+                <div class="accordion" id="accordionCoatzacoalcos"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Grupos de Acceso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../Sources/js/gruposAccDatos.js"></script>
+    <script src="../Sources/js/gruposAcc.js"></script>
+</body>
+</html>

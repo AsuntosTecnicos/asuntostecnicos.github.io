@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Síntesis Curricular</title>
+    <link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="../sources/cssSintesis.css">
+</head>
+<body>
+
+    <section class="hero is-small bg-azul is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title has-text-white">Síntesis Curricular</h1>
+                <h2 class="subtitle has-text-white" id="header_nombre">Recursos Humanos</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-9">
+                    
+                    <div id="error_message" class="notification is-danger is-light is-hidden has-text-centered">
+                        No se encontró el número de personal solicitado.
+                    </div>
+
+                    <div id="main_card" class="card card-profile">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-96x96">
+                                        <img src="https://ui-avatars.com/api/?name=User&background=18529D&color=ffffff&size=128" id="avatar" alt="Avatar" class="is-rounded">
+                                    </figure>
+                                </div>
+                                <div class="media-content p-4">
+                                    <p class="title is-3" id="nombre">Cargando...</p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="columns is-multiline">
+                                <div class="column is-12">
+                                    <h4 class="title is-5"><i class="fas fa-graduation-cap text-verde"></i> Formación</h4>
+                                    <p><strong>Título:</strong> <span id="titulo"></span></p>
+                                    <p><strong>Posgrados:</strong> <span id="posgrados"></span></p>
+                                </div>
+                                <div class="column is-12">
+                                    <h4 class="title is-5"><i class="fas fa-briefcase text-verde"></i> Experiencia</h4>
+                                    <p id="cargos"></p>
+                                </div>
+                                <div class="column is-12">
+                                    <h4 class="title is-5"><i class="fas fa-tags text-verde"></i> Otras Actividades</h4>
+                                    <div id="tags_container" class="tags"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p><strong>Universidad Veracruzana<br>
+            Dirección General de Recursos Humanos</strong><br>
+            Departamento de Asuntos Técnicos &copy; 2026</p>
+        </div>
+    </footer>
+
+    <script src="../sources/datosSintesis.js"></script>   
+    <script src="../sources/jsSintesisC.js"></script>
+
+</body>
+</html>

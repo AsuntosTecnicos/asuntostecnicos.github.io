@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Tramites</title>
+		<!-- estilos Bulma -->
+		<link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+        <!-- estilos propios -->
+		<link rel="stylesheet" type="text/css" href="../sources/estilos.css">
+		<!-- iconos -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Alpine.js -->
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="layout">
+
+			<div class="container box barratitulo is-flex is-align-items-center is-justify-content-center">
+				<span id="barratitulo" class="has-text-white has-text-weight-medium is-size-6-tablet">
+					Calendario de recepción de trámites, registro de movimientos y o documentos para pago
+				</span>
+			</div>
+
+
+			<div class="main" x-data="{ tab: 'calendario' }">
+
+			<section class="section tabs-fijas mt-0 pt-2">
+				<div class="container ">		
+					<div class="tabs is-boxed is-centered">
+						<ul>
+							<li :class="{ 'is-active': tab === 'calendario' }">
+								<a @click="tab = 'calendario'">
+									<span class="icon is-small">
+										<i class="fa-regular fa-calendar-days"></i>
+									</span>
+									<span class="tab-text">Calendario</span>
+								</a>
+							</li>
+
+							<li>
+								<a href="https://www.uv.mx/dgrh/files/2026/01/Calendario-de-recepcion-de-tramites-registro-de-movimientos-y-o-documentos-para-pago-2026-FR-220126-final-1.pdf" target="_blank">
+									<span class="icon is-small">
+										<i class="fa-regular fa-file-pdf"></i>
+									</span>
+									<span class="tab-text">PDF</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- CONTENIDO -->
+			<section class="section mt-0 pt-3 contenido-scroll">
+				<div class="container">
+				
+					<div class="box" x-data="fechasApp()">
+					
+						<div x-show="tab === 'calendario'">
+							
+							<div class="notification is-info is-light">
+                                <p>Las fechas del presente calendario, se definen considerando los compromisos de pago convenidos por la Universidad
+                                Veracruzana con sus trabajadores, el tiempo del proceso integral de la nómina y específicamente la fecha de cierre que requiere
+                                seis días hábiles antes del día pago, consideran la planeación y programación de los movimientos de personal con base en los
+                                tiempos de proceso desde las entidades académicas y dependencias hasta la validación que debe realizar la Dirección de Personal
+                                y en su caso, integración del movimiento al proceso nominal.</p>
+                                <br>
+								<p>Para estar en posibilidad de validar en tiempo, <span class="has-text-weight-bold">el Subsistema de Recursos Humanos permanece disponible de forma
+                                continua para ingresar solicitudes y es necesario que las entidades académicas y dependencias registren los trámites en los
+                                periodos ordinarios de recepción en cuanto les sea posible aplicar el movimiento y no acumularlos hasta la fecha límite</span>; aquellos
+                                que se registren posterior a la fecha establecida conforme a la quincena correspondiente, se analizarán y, en su caso, procederán
+                                para pago en la quincena inmediata posterior.</p>
+							</div>
+							
+							<div class="is-hidden-mobile">
+								<table class="table is-bordered is-fullwidth tabla-simetrica" id="tablaFechas">
+									<thead>
+										<tr>
+											<th>Quincena</th>
+											<th>Fechas de pago de la nómina</th>
+											<th>Fecha límite de recepción</th>
+										</tr>
+									</thead>
+									<tbody>
+										<template x-for="item in datos" :key="item.titulo">
+											<tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha), 'has-background-warning': esHoy(item.fecha) }">
+												<td x-text="item.titulo"></td>
+												<td x-text="item.fechaNomina"></td>
+												<td x-text="item.fechaTexto"></td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+							</div>
+							
+
+							<div id="cardsFechas" class="is-hidden-tablet">
+								<template x-for="item in datos" :key="item.titulo">
+									<div class="card mb-2"
+										:class="{ 'has-background-grey-lighter has-text-grey': esVencida(item.fecha), 'has-background-warning': esHoy(item.fecha) }">
+										<div class="card-content py-2">
+											<span class="is-size-6">Quincena: </span><p class="has-text-weight-semibold" x-text="item.titulo"></p>
+											<span class="is-size-6">Fechas de pago de la nómina: </span><p class="has-text-weight-semibold" x-text="item.fechaNomina"></p>
+											<span class="is-size-6">Fecha límite de recepción: </span><p class="has-text-weight-semibold" x-text="item.fechaTexto"></p>
+										</div>
+									</div>
+								</template>
+							</div>
+
+							<div class="notification has-text is-size-7 is-danger is-light mt-2 p-2">
+								<p>
+									*Fechas susceptibles a cambio por la notificación de fechas para la presentación de informes trimestrales o por periodo vacacional.
+                                    <br>
+                                    **Fechas que se definirán hasta la publicación de la Circular para Cierre Contable-Presupuestal del Ejercicio 2026.
+									<br>
+									Si los renglones se encuentran en color gris significa que el periodo de registro o entrega ha vencido.
+								</p>
+								<p><span class="has-text-weight-bold">Fecha de emisión:</span> 22/01/2026</p>
+							</div>
+
+						</div>
+					
+				    </div>
+			    </div>		
+			</section>
+		</div>
+		
+	</div>
+		<script src="../sources/tramitespago.js"></script>
+    </body>
+</html>

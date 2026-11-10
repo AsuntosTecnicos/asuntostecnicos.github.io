@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Directorio</title>
+		<!-- estilos Bulma -->
+		<link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+        <!-- estilos propios -->
+		<link rel="stylesheet" type="text/css" href="../sources/estilos.css">
+		<!-- iconos -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Alpine.js -->
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+	</head>
+    
+    <body class="section mt-1 pt-1">
+
+        <div class="container" x-data="directorio()">
+
+            <!-- Buscador -->
+            <div class="field mb-5">
+                <div class="control">
+                    <input class="input" type="text" placeholder="Buscar por nombre o puesto…" x-model="busqueda">
+                </div>
+            </div>
+
+            <!-- CARD DIRECCIÓN GENERAL (SIEMPRE VISIBLE) -->
+            <div class="box borde-azul mb-5" x-effect="direccionGeneral.DGAbierta = busqueda && direccionGeneralTieneCoincidencias() ? true : direccionGeneral.DGAbierta">
+
+                <!-- Encabezado -->
+                <div class="media is-align-items-center" style="cursor:pointer" @click="direccionGeneral.DGAbierta = !direccionGeneral.DGAbierta">
+
+                    <div class="media-left">
+                        <figure class="image is-64x64">
+                            <img :src="fotoPersona(direccionGeneral.titular)">
+                        </figure>
+                    </div>
+
+                    <div class="media-content">
+                        <p class="title is-5" x-text="direccionGeneral.titular.nombre"></p>
+                        <p class="subtitle is-6" x-text="direccionGeneral.titular.puesto"></p>
+                        <p class="telefono" x-text="direccionGeneral.titular.telefono"></p>
+                    </div>
+
+                    <div class="media-right">
+                        <span class="has-text-weight-bold is-size-4" x-text="direccionGeneral.DGAbierta ? '-' : '+'"></span>
+                    </div>
+
+                </div>
+
+                <!-- Contenido colapsable -->
+                <div x-show="direccionGeneral.DGAbierta" x-transition class="mt-5">
+
+                    <!-- Direcciones -->
+                    <template x-if="direccionGeneral.subdirectores.length">
+                        <div class="mb-5">
+                            <p class="has-text-weight-semibold mb-3">Direcciones</p>
+
+                            <div class="columns is-multiline">
+                                <template x-for="(sub, i) in direccionGeneral.subdirectores" :key="i">
+                                    <template x-if="coincideBusqueda(sub)">
+                                        <div class="column is-4">
+                                            <div class="card borde-verde">
+                                                <div class="card-content is-flex">
+                                                    <figure class="image is-64x64 mr-4">
+                                                        <img :src="fotoPersona(sub)">
+                                                    </figure>
+                                                    <div>
+                                                        <p class="title is-6" x-text="sub.nombre"></p>
+                                                        <p class="subtitle is-7" x-text="sub.puesto"></p>
+                                                        <p class="telefono" x-text="sub.telefono"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Jefaturas -->
+                    <template x-if="direccionGeneral.jefaturas.length">
+                        <div>
+                            <p class="has-text-weight-semibold mb-3">Administración y Jefaturas</p>
+                            <div class="columns is-multiline">
+                                <template x-for="(jef, i) in direccionGeneral.jefaturas" :key="i">
+                                    <template x-if="coincideBusqueda(jef)">
+                                        <div class="column is-4">
+                                            <div class="card borde-gris">
+                                                <div class="card-content is-flex">
+                                                    <figure class="image is-64x64 mr-4">
+                                                        <img :src="fotoPersona(jef)">
+                                                    </figure>
+                                                    <div>
+                                                        <p class="title is-6" x-text="jef.nombre"></p>
+                                                        <p class="subtitle is-7" x-text="jef.puesto"></p>
+                                                        <p class="telefono" x-text="jef.telefono"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+
+
+            <!-- Subdirecciones -->
+            <template x-for="(sub, index) in direccionGeneral.subdirecciones" :key="index">
+                <div class="box mb-4" x-effect="sub.abierto = busqueda && subTieneCoincidencias(sub) ? true : sub.abierto">
+
+                    <!-- Encabezado -->
+                    <div class="is-flex is-justify-content-space-between is-align-items-center borde-verde p-3" style="cursor:pointer" @click="sub.abierto = !sub.abierto">
+                        <strong class="is-size-5" x-text="sub.nombre"></strong>
+                        <span x-text="sub.abierto ? '−' : '+'"></span>
+                    </div>
+
+                    <div x-show="sub.abierto" x-transition class="mt-4">
+
+                        <!-- Director de Subdirección -->
+                        <template x-if="coincideBusqueda(sub.director)">
+                            <div class="box borde-verde mb-4 is-flex is-align-items-center">
+                                <figure class="image is-64x64 mr-4">
+                                    <img :src="fotoPersona(sub.director)">
+                                </figure>
+                                <div>
+                                    <p class="title is-6" x-text="sub.director.nombre"></p>
+                                    <p class="subtitle is-7" x-text="sub.director.puesto"></p>
+                                    <p class="telefono" x-text="sub.director.telefono"></p>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Jefaturas -->
+                        <div class="columns is-multiline">
+                            <template x-for="(jef, j) in sub.jefaturas" :key="j">
+                                <template x-if="coincideBusqueda(jef)">
+                                    <div class="column is-4">
+                                        <div class="card borde-gris">
+                                            <div class="card-content is-flex">
+                                                <figure class="image is-64x64 mr-4">
+                                                    <img :src="fotoPersona(jef)">
+                                                </figure>
+                                                <div>
+                                                    <p class="is-size-6 has-text-weight-medium mb-3" x-text="jef.Dirdep"></p>
+                                                    <p class="title is-6" x-text="jef.nombre"></p>
+                                                    <p class="subtitle is-7" x-text="jef.puesto"></p>
+                                                    <p class="telefono" x-text="jef.telefono"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+
+                    </div>
+                </div>
+            </template>
+
+        </div>
+
+        <script src="../sources/directorio.js"></script>
+
+    </body>
+</html>
